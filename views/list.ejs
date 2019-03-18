@@ -1,0 +1,71 @@
+<%- include("header") -%>
+
+<div class="icon-show-list-button">
+
+    <a href="/customLists">
+        Custom lists
+        <i class="fas fa-clipboard-list icon-button"></i>
+
+    </a>
+
+
+    <% if(isCustomList) {%>
+      <a href="/">
+
+        To-Do list
+        <i class="fas fa-home icon-button"></i>
+
+    </a>        <% }%>
+
+
+</div>
+
+
+
+<div class="box" id="heading">
+  <h1>
+    <%= listTitle %>
+  </h1>
+</div>
+
+<div class="box">
+
+
+  <%  newListItems.forEach( function(item){ %>
+  
+    <form action="/delete" method="post">
+      <div class="item">
+          <input type="checkbox" value="<%= item._id %>" name="checkbox"  onChange="this.form.submit()">
+          <input type="hidden" name="listName" value="<%=listTitle%>">
+          <p>
+            <%=  item.name  %>
+          </p>
+        </div>    
+    </form>
+ 
+  <%   } ); %>
+
+
+
+  <form class="item" action="/" method="post">
+    <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
+    <button type="submit" name="list" value="<%=listTitle%>">+</button>
+  </form>
+
+  <% if(isCustomList) {%>
+    <hr>
+
+
+    <form class="item" action="/deleteList" method="post">
+
+      <p class="text-delete-list"> Delete list</p>
+
+      <button type="submit" name="list" class="delete-button" value="<%=listTitle%>">
+          <i class="fas fa-trash "></i>
+        </button>
+    </form>
+
+    <% } %>
+</div>
+
+<%- include("footer") -%>

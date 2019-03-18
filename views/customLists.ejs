@@ -1,0 +1,98 @@
+<%- include("header") -%>
+
+<div class="icon-show-list-button">
+
+    <a href="/">
+        To-Do list
+        <i class="fas fa-home icon-button"></i>
+
+    </a>
+
+
+</div>
+
+
+
+
+<div class="box" id="heading">
+    <h1>
+        Custom Lists
+    </h1>
+</div>
+
+
+
+
+<div class="box-lists">
+
+    <div class="row">
+
+
+        <%  customLists.forEach( function(list){ %>
+
+        <div class="col-md-4">
+
+
+            <form action="/delete" method="post">
+
+
+                <div class="item">
+
+
+
+                    <p class="list-name">
+                        <a href="/<%=list.name%>">
+                            <%=list.name%></a>
+
+                    </p>
+
+                    <p class="list-qty">
+                        <%= list.listItems.length%>
+                    </p>
+
+
+
+
+
+                </div>
+
+
+        </div>
+
+
+
+
+
+
+        </form>
+
+        <%   } ); %>
+
+    </div>
+
+
+    <% if(customLists.length !== 0){ %>
+
+    <hr>
+    <% } %>
+
+    <div class=new-list>
+
+        <p class="newList-alert">
+            <%=message %>
+        </p>
+
+        <form class="item form-newlist" action="/createList" method="post">
+            <input type="text" name="newList" placeholder="New List" autocomplete="off">
+            <button type="submit" name="list" value="<%=listTitle%>">+</button>
+        </form>
+
+
+    </div>
+
+
+
+
+</div>
+
+<%- include("footer") -%>
