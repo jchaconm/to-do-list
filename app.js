@@ -35,8 +35,6 @@ const listSchema = {
   listItems: [itemSchema]
 }
 
-
-
 const Item = mongoose.model("Item", itemSchema);
 
 const List = mongoose.model("List", listSchema);
@@ -46,7 +44,7 @@ const item1 = new Item({
 });
 
 const item2 = new Item({
-  name: "Hit the + button to add a  new item"
+  name: "Hit the + button to add a new item"
 });
 
 
@@ -54,8 +52,9 @@ const item3 = new Item({
   name: "<--- Hit this to delete an item"
 });
 
-const defaultItems = [item1, item2, item3];
+const today = new Date();
 
+const defaultItems = [item1, item2, item3];
 
 /* 
 
@@ -79,10 +78,7 @@ app.get("/", function (req, res) {
         }
 
       })
-
       res.redirect("/");
-
-
 
     } else {
 
@@ -91,13 +87,7 @@ app.get("/", function (req, res) {
         newListItems: foundItems,
         isCustomList : false
       });
-
-
     }
-
-
-
-
   })
 
 
@@ -106,7 +96,7 @@ app.get("/", function (req, res) {
 
 
 app.get("/customLists", function (req, res) {
-
+  console.log("******************************************");
   List.find({}, function (err, foundLists) {
 
     console.log(foundLists);
@@ -114,12 +104,8 @@ app.get("/customLists", function (req, res) {
     res.render("customLists", {
       customLists: foundLists,
       listTitle: "",
-      message : ""
-
+      message : "",
     });
-
-
-
 
   });
 
@@ -146,9 +132,6 @@ app.post("/createList", function (req, res) {
       } else {
 
         res.redirect("/customLists");
-
-               
-      
 
       }
 
@@ -241,11 +224,8 @@ app.post("/deleteList", function(req,res){
     if(err){
       console.log(err);
     }else{
-
-      res.redirect("/customLists");     
-     
+      res.redirect("/customLists");
     }
-
   })
 
 });
@@ -253,7 +233,6 @@ app.post("/deleteList", function(req,res){
 
 app.get("/:customListName", function (req, res) {
   const customListName = _.capitalize(req.params.customListName);
-
 
   console.log(req.params.customListName);
 
@@ -276,22 +255,12 @@ app.get("/:customListName", function (req, res) {
           listTitle: foundList.name,
           newListItems: foundList.listItems,
           isCustomList : true
-
         })
-
       }
-
     }
   });
 
 });
-
-
-
-
-
-
-
 
 app.listen(process.env.PORT || 3000, function () {
   console.log("Server started on port 3000");
