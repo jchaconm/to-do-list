@@ -32,37 +32,24 @@
 
         <div class="col-md-4">
 
-
             <form action="/delete" method="post">
-
 
                 <div class="item">
 
-
-
                     <p class="list-name">
                         <a href="/<%=list.name%>">
-                            <%=list.name%></a>
-
+                            <%=list.name%>
+                        </a>
                     </p>
 
                     <p class="list-qty">
                         <%= list.listItems.length%>
                     </p>
 
-
-
-
-
                 </div>
 
 
         </div>
-
-
-
-
-
 
         </form>
 
@@ -72,7 +59,7 @@
 
 
     <% if(customLists.length !== 0){ %>
-
+    <h1 style="color: green">EXISTEN <%=customLists.length%> LISTAS</h1>
     <hr>
     <% } %>
 
@@ -87,11 +74,7 @@
             <button type="submit" name="list" value="<%=listTitle%>">+</button>
         </form>
 
-
     </div>
-
-
-
 
 </div>
 
